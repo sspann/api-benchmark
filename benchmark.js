@@ -3,10 +3,10 @@
 import apiBenchmark from 'api-benchmark';
 import fs from 'fs';
 
-const service = {
-  'EFCore Server': 'http://localhost:5000/api/v1/',
-  'Dapper Server': 'http://localhost:5001/api/v1/',
-  'NodeJS Server': 'http://localhost:5002/api/v1/',
+const services = {
+  'EFCore Server': process.env.EFCORE_SERVER || 'http://localhost:5000/api/v1/',
+  'Dapper Server': process.env.DAPPER_SERVER || 'http://localhost:5001/api/v1/',
+  'NodeJS Server': process.env.NODE_SERVER || 'http://localhost:5002/api/v1/',
 };
 
 const routes = {
@@ -66,7 +66,7 @@ const routes = {
   },
 };
 
-apiBenchmark.measure(service, routes, { minSamples: 100 }, (error, results) => {
+apiBenchmark.measure(services, routes, { minSamples: 100 }, (error, results) => {
   apiBenchmark.getHtml(results, (err, html) => {
     if (err) console.error('There was an error generating the html: ', err);
     fs.writeFile('benchmark.html', html, (e) => {
