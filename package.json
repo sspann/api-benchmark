@@ -4,7 +4,8 @@
   "description": "Benchmark test for Demo APIs.",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --ext .js ./"
+    "lint": "eslint --ext .js ./",
+    "benchmark": "npm run lint && babel-node ./benchmark.js"
   },
   "repository": {
     "type": "git",
